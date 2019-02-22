@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="DBSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">iERP86_Test</Value>
+    </Setting>
+    <Setting Name="PasswordSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DinosaurP0psicle</Value>
+    </Setting>
+    <Setting Name="ServerSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">jamee</Value>
+    </Setting>
+    <Setting Name="UserSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="DBTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)">iERP86_Dev</Value>
+    </Setting>
+    <Setting Name="PasswordTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DinosaurP0psicle</Value>
+    </Setting>
+    <Setting Name="ServerTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)">jamee</Value>
+    </Setting>
+    <Setting Name="UserTarget" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

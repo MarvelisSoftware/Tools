@@ -1,0 +1,3 @@
+G:\Code\DBSearch\DBSearch\obj\Debug\DB Search.exe
+G:\Code\DBSearch\DBSearch\obj\Debug\DB Search.xml
+G:\Code\DBSearch\DBSearch\obj\Debug\DB Search.pdb
