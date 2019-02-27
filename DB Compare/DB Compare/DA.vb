@@ -103,7 +103,7 @@ Public Module DA
         Try
 
             For Each DC In col
-                strFieldList &= DC.ColumnName & ", "
+                strFieldList &= "[" & DC.ColumnName & "], "
             Next
             If col.Count > 0 Then
                 strFieldList = strFieldList.Substring(0, strFieldList.Length - 2)

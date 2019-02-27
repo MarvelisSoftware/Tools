@@ -60,6 +60,8 @@ Partial Class frmMain
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.treSource = New System.Windows.Forms.TreeView()
         Me.txtFilterTable = New System.Windows.Forms.TextBox()
+        Me.btnAllSelect = New System.Windows.Forms.Button()
+        Me.btnClearAll = New System.Windows.Forms.Button()
         Me.tpTablesFields.SuspendLayout()
         CType(Me.SplitTables, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitTables.Panel1.SuspendLayout()
@@ -434,12 +436,34 @@ Partial Class frmMain
         Me.txtFilterTable.Size = New System.Drawing.Size(318, 20)
         Me.txtFilterTable.TabIndex = 2
         '
+        'btnAllSelect
+        '
+        Me.btnAllSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnAllSelect.Location = New System.Drawing.Point(25, 480)
+        Me.btnAllSelect.Name = "btnAllSelect"
+        Me.btnAllSelect.Size = New System.Drawing.Size(75, 23)
+        Me.btnAllSelect.TabIndex = 61
+        Me.btnAllSelect.Text = "&Select All"
+        Me.btnAllSelect.UseVisualStyleBackColor = True
+        '
+        'btnClearAll
+        '
+        Me.btnClearAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnClearAll.Location = New System.Drawing.Point(106, 480)
+        Me.btnClearAll.Name = "btnClearAll"
+        Me.btnClearAll.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearAll.TabIndex = 62
+        Me.btnClearAll.Text = "&Clear All"
+        Me.btnClearAll.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(762, 521)
+        Me.Controls.Add(Me.btnClearAll)
+        Me.Controls.Add(Me.btnAllSelect)
         Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnDiff)
@@ -507,5 +531,7 @@ Partial Class frmMain
     Friend WithEvents tcTableResults As System.Windows.Forms.TabControl
     Friend WithEvents treSource As System.Windows.Forms.TreeView
     Friend WithEvents txtFilterTable As System.Windows.Forms.TextBox
+    Friend WithEvents btnAllSelect As System.Windows.Forms.Button
+    Friend WithEvents btnClearAll As System.Windows.Forms.Button
 
 End Class

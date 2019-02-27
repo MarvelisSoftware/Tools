@@ -29,8 +29,11 @@ Public Class frmMain
 
 
     Private meFilter As eFilterState
+    Private mbInReload As Boolean
     Private mdictSource As Dictionary(Of String, DataTable)
     Private mdictTarget As Dictionary(Of String, DataTable)
+    Private mlisTree As List(Of TreeNode)
+
 
     Private Property datProduction As Object
 
@@ -81,6 +84,28 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub btnClearAll_Click(sender As Object, e As EventArgs) Handles btnClearAll.Click
+
+        Dim Node As TreeNode
+
+
+        For Each Node In treSource.Nodes
+            Node.Checked = False
+        Next
+
+    End Sub
+
+    Private Sub btnAllSelect_Click(sender As Object, e As EventArgs) Handles btnAllSelect.Click
+
+        Dim Node As TreeNode
+
+
+        For Each Node In treSource.Nodes
+            Node.Checked = True
+        Next
+
+    End Sub
+
     Private Sub btnDiff_Click(sender As Object, e As EventArgs) Handles btnDiff.Click
 
         Diff()
@@ -89,7 +114,9 @@ Public Class frmMain
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
 
+        mbInReload = True
         PopulateTables()
+        mbInReload = False
 
     End Sub
 
@@ -157,11 +184,16 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub txtFilterTable_TextChanged(sender As Object, e As EventArgs) Handles txtFilterTable.TextChanged
+
+        FilterTree(txtFilterTable.Text)
+
+    End Sub
+
 
     Private Sub CreateContextMenu()
 
         Dim cms As ContextMenu
-        Dim item As ToolStripMenuItem
 
 
         cms = New ContextMenu
@@ -221,6 +253,36 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub FilterTree(strFilter As String)
+
+        Dim CurrentNode As TreeNode
+
+
+        Try
+
+            Me.Cursor = Cursors.WaitCursor
+
+            With treSource
+
+                .BeginUpdate()
+                .Nodes.Clear()
+
+                For Each CurrentNode In mlisTree
+                    If CurrentNode.Text.Length >= strFilter.Length AndAlso CurrentNode.Text.Substring(0, strFilter.Length).ToUpper = strFilter.ToUpper Or strFilter = String.Empty Then
+                        treSource.Nodes.Add(CurrentNode)
+                    End If
+                Next
+                .EndUpdate()
+
+            End With
+
+        Finally
+            Me.Cursor = Cursors.Default
+
+        End Try
+
+    End Sub
+
     Private Sub PopulateFields(Node As TreeNode)
 
         Dim r As Integer
@@ -260,6 +322,7 @@ Public Class frmMain
         Try
 
             strTables = DA.GetTables(cboServerSource.Text, cboDatabaseSource.Text, txtUserSource.Text, txtPasswordSource.Text)
+            mlisTree = New List(Of TreeNode)()
 
             With treSource
 
@@ -267,13 +330,17 @@ Public Class frmMain
                 .BeginUpdate()
                 For r = 0 To strTables.GetUpperBound(0)
                     Node = New TreeNode(strTables(r), eImage.Table, eImage.TableSelected)
-
                     .Nodes.Add(Node)
+                    mlisTree.Add(Node)
                 Next
                 .Sort()
                 .EndUpdate()
 
             End With
+
+            If txtFilterTable.Text <> String.Empty Then
+                FilterTree(txtFilterTable.Text)
+            End If
 
 
         Catch ex As Exception
@@ -300,6 +367,7 @@ Public Class frmMain
 
         mdictSource = New Dictionary(Of String, DataTable)
         mdictTarget = New Dictionary(Of String, DataTable)
+        tcTableResults.TabPages.Clear()
 
         For Each TableNode In treSource.Nodes
 
@@ -672,8 +740,8 @@ Public Class frmMain
                 'PKey matches
                 For rr = 0 To DTS.Columns.Count - 1
                     If DTS.Rows(r).Item(rr).ToString <> DRR(0).Item(rr).ToString Then
-                        dictDiffSource.Add(strPKeyValue & " - " & DTS.Columns(r).ColumnName, "Values different - " & DTS.Rows(r).Item(rr).ToString)
-                        dictDiffTarget.Add(strPKeyValue & " - " & DTT.Columns(r).ColumnName, "Values different - " & DTT.Rows(r).Item(rr).ToString)
+                        dictDiffSource.Add(strPKeyValue & " - " & DTS.Columns(rr).ColumnName, "Values different - " & DTS.Rows(r).Item(rr).ToString)
+                        dictDiffTarget.Add(strPKeyValue & " - " & DTT.Columns(rr).ColumnName, "Values different - " & DTT.Rows(r).Item(rr).ToString)
                     End If
                 Next
 
