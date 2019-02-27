@@ -1,4 +1,6 @@
-﻿Imports System.Math
+﻿'Created by John Maher
+
+Imports System.Math
 
 
 Public Class frmMain
@@ -750,6 +752,12 @@ Public Class frmMain
                 txtFilterTable.Visible = True
 
         End Select
+
+    End Sub
+
+    Private Sub Test()
+
+        MessageBox.Show("Here!")
 
     End Sub
 
