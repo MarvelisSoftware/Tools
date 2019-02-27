@@ -26,8 +26,8 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.tpTablesFields = New System.Windows.Forms.TabPage()
         Me.SplitTables = New System.Windows.Forms.SplitContainer()
-        Me.treSource = New System.Windows.Forms.TreeView()
         Me.ImagesTree = New System.Windows.Forms.ImageList(Me.components)
+        Me.tcTableResults = New System.Windows.Forms.TabControl()
         Me.tabSearchOptions = New System.Windows.Forms.TabControl()
         Me.tpStoredProcedures = New System.Windows.Forms.TabPage()
         Me.lblSPs = New System.Windows.Forms.Label()
@@ -58,7 +58,8 @@ Partial Class frmMain
         Me.btnDiff = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
-        Me.tcTableResults = New System.Windows.Forms.TabControl()
+        Me.treSource = New System.Windows.Forms.TreeView()
+        Me.txtFilterTable = New System.Windows.Forms.TextBox()
         Me.tpTablesFields.SuspendLayout()
         CType(Me.SplitTables, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitTables.Panel1.SuspendLayout()
@@ -91,6 +92,7 @@ Partial Class frmMain
         '
         'SplitTables.Panel1
         '
+        Me.SplitTables.Panel1.Controls.Add(Me.txtFilterTable)
         Me.SplitTables.Panel1.Controls.Add(Me.treSource)
         '
         'SplitTables.Panel2
@@ -100,18 +102,6 @@ Partial Class frmMain
         Me.SplitTables.SplitterDistance = 324
         Me.SplitTables.TabIndex = 0
         '
-        'treSource
-        '
-        Me.treSource.CheckBoxes = True
-        Me.treSource.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.treSource.ImageIndex = 0
-        Me.treSource.ImageList = Me.ImagesTree
-        Me.treSource.Location = New System.Drawing.Point(0, 0)
-        Me.treSource.Name = "treSource"
-        Me.treSource.SelectedImageIndex = 0
-        Me.treSource.Size = New System.Drawing.Size(324, 224)
-        Me.treSource.TabIndex = 0
-        '
         'ImagesTree
         '
         Me.ImagesTree.ImageStream = CType(resources.GetObject("ImagesTree.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -120,6 +110,15 @@ Partial Class frmMain
         Me.ImagesTree.Images.SetKeyName(1, "Table")
         Me.ImagesTree.Images.SetKeyName(2, "FieldSelected")
         Me.ImagesTree.Images.SetKeyName(3, "TableSelected")
+        '
+        'tcTableResults
+        '
+        Me.tcTableResults.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tcTableResults.Location = New System.Drawing.Point(0, 0)
+        Me.tcTableResults.Name = "tcTableResults"
+        Me.tcTableResults.SelectedIndex = 0
+        Me.tcTableResults.Size = New System.Drawing.Size(387, 224)
+        Me.tcTableResults.TabIndex = 0
         '
         'tabSearchOptions
         '
@@ -385,6 +384,7 @@ Partial Class frmMain
         '
         'btnDiff
         '
+        Me.btnDiff.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDiff.Location = New System.Drawing.Point(587, 486)
         Me.btnDiff.Name = "btnDiff"
         Me.btnDiff.Size = New System.Drawing.Size(75, 23)
@@ -394,6 +394,7 @@ Partial Class frmMain
         '
         'btnClose
         '
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Location = New System.Drawing.Point(668, 486)
         Me.btnClose.Name = "btnClose"
@@ -411,14 +412,27 @@ Partial Class frmMain
         Me.btnRefresh.Text = "&Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
-        'tcTableResults
+        'treSource
         '
-        Me.tcTableResults.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tcTableResults.Location = New System.Drawing.Point(0, 0)
-        Me.tcTableResults.Name = "tcTableResults"
-        Me.tcTableResults.SelectedIndex = 0
-        Me.tcTableResults.Size = New System.Drawing.Size(387, 224)
-        Me.tcTableResults.TabIndex = 0
+        Me.treSource.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.treSource.BackColor = System.Drawing.SystemColors.Window
+        Me.treSource.CheckBoxes = True
+        Me.treSource.ImageIndex = 0
+        Me.treSource.ImageList = Me.ImagesTree
+        Me.treSource.Location = New System.Drawing.Point(0, 29)
+        Me.treSource.Name = "treSource"
+        Me.treSource.SelectedImageIndex = 0
+        Me.treSource.Size = New System.Drawing.Size(321, 195)
+        Me.treSource.TabIndex = 1
+        '
+        'txtFilterTable
+        '
+        Me.txtFilterTable.Location = New System.Drawing.Point(3, 3)
+        Me.txtFilterTable.Name = "txtFilterTable"
+        Me.txtFilterTable.Size = New System.Drawing.Size(318, 20)
+        Me.txtFilterTable.TabIndex = 2
         '
         'frmMain
         '
@@ -438,6 +452,7 @@ Partial Class frmMain
         Me.Text = "DB Compare"
         Me.tpTablesFields.ResumeLayout(False)
         Me.SplitTables.Panel1.ResumeLayout(False)
+        Me.SplitTables.Panel1.PerformLayout()
         Me.SplitTables.Panel2.ResumeLayout(False)
         CType(Me.SplitTables, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitTables.ResumeLayout(False)
@@ -485,11 +500,12 @@ Partial Class frmMain
     Friend WithEvents lblDatabaseTarget As System.Windows.Forms.Label
     Friend WithEvents lblServerTarget As System.Windows.Forms.Label
     Friend WithEvents SplitTables As System.Windows.Forms.SplitContainer
-    Friend WithEvents treSource As System.Windows.Forms.TreeView
     Friend WithEvents btnDiff As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnRefresh As System.Windows.Forms.Button
     Friend WithEvents ImagesTree As System.Windows.Forms.ImageList
     Friend WithEvents tcTableResults As System.Windows.Forms.TabControl
+    Friend WithEvents treSource As System.Windows.Forms.TreeView
+    Friend WithEvents txtFilterTable As System.Windows.Forms.TextBox
 
 End Class

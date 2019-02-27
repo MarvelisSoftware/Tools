@@ -63,3 +63,7 @@ Z:\Intuitive8.5\Code\DB Search\obj\Debug\DB_Search.frmAbout.resources
 Z:\Intuitive8.5\Code\DB Search\obj\Debug\DB_Search.frmMain.resources
 Z:\Intuitive8.5\Code\DB Search\obj\Debug\DB_Search.Resources.resources
 Z:\Intuitive8.5\Code\DB Search\obj\Debug\DB Search.vbproj.GenerateResource.Cache
+C:\Code\Tools\DB Search\bin\Debug\DB Search.exe.config
+C:\Code\Tools\DB Search\obj\Debug\DB Search.exe
+C:\Code\Tools\DB Search\obj\Debug\DB Search.xml
+C:\Code\Tools\DB Search\obj\Debug\DB Search.pdb

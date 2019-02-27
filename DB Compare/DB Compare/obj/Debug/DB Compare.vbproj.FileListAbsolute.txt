@@ -9,3 +9,14 @@ C:\Code\DB Compare\DB Compare\bin\Debug\DB Compare.xml
 C:\Code\DB Compare\DB Compare\obj\Debug\DB Compare.exe
 C:\Code\DB Compare\DB Compare\obj\Debug\DB Compare.xml
 C:\Code\DB Compare\DB Compare\obj\Debug\DB Compare.pdb
+C:\Code\Tools\DB Compare\DB Compare\bin\Debug\DB Compare.exe.config
+C:\Code\Tools\DB Compare\DB Compare\obj\Debug\DB Compare.exe
+C:\Code\Tools\DB Compare\DB Compare\obj\Debug\DB Compare.pdb
+C:\Code\Tools\DB Compare\DB Compare\bin\Debug\DB Compare.exe
+C:\Code\Tools\DB Compare\DB Compare\bin\Debug\DB Compare.pdb
+C:\Code\Tools\DB Compare\DB Compare\obj\Debug\DB_Compare.frmAbout.resources
+C:\Code\Tools\DB Compare\DB Compare\obj\Debug\DB_Compare.frmMain.resources
+C:\Code\Tools\DB Compare\DB Compare\obj\Debug\DB_Compare.Resources.resources
+C:\Code\Tools\DB Compare\DB Compare\obj\Debug\DB Compare.vbproj.GenerateResource.Cache
+C:\Code\Tools\DB Compare\DB Compare\bin\Debug\DB Compare.xml
+C:\Code\Tools\DB Compare\DB Compare\obj\Debug\DB Compare.xml

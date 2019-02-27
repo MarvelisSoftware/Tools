@@ -1,12 +1,15 @@
-﻿
+﻿Imports System.Math
+
 
 Public Class frmMain
 
 
-    Private Enum eWhich
-        None
-        Source
-        Target
+    Private Const mconFilterMargin As Integer = 29
+
+
+    Private Enum eFilterState
+        Hide
+        Show
     End Enum
 
     Private Enum eImage
@@ -16,11 +19,27 @@ Public Class frmMain
         TableSelected
     End Enum
 
+    Private Enum eWhich
+        None
+        Source
+        Target
+    End Enum
 
+
+    Private meFilter As eFilterState
     Private mdictSource As Dictionary(Of String, DataTable)
     Private mdictTarget As Dictionary(Of String, DataTable)
 
     Private Property datProduction As Object
+
+
+    Public Sub New()
+
+        InitializeComponent()
+        ToggleFilter(meFilter)
+        CreateContextMenu()
+
+    End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -112,7 +131,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub treSource_AfterCheck(sender As Object, e As TreeViewEventArgs) Handles treSource.AfterCheck
+    Private Sub treSource_AfterCheck(sender As Object, e As TreeViewEventArgs)
 
         Dim ChildNode As TreeNode
         Dim ParentNode As TreeNode
@@ -125,7 +144,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub treSource_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles treSource.NodeMouseClick
+    Private Sub treSource_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs)
 
         Dim Node As TreeNode = e.Node
 
@@ -133,6 +152,21 @@ Public Class frmMain
         If Node.Nodes.Count = 0 Then
             PopulateFields(Node)
         End If
+
+    End Sub
+
+
+    Private Sub CreateContextMenu()
+
+        Dim cms As ContextMenu
+        Dim item As ToolStripMenuItem
+
+
+        cms = New ContextMenu
+        cms.MenuItems.Add("Toggle &Filter")
+        AddHandler (cms.MenuItems(0).Click), AddressOf ToggleFilter
+
+        treSource.ContextMenu = cms
 
     End Sub
 
@@ -614,7 +648,7 @@ Public Class frmMain
         Dim strPKey As String = String.Empty
         Dim PKeys As Dictionary(Of String, String)
         Dim strPKeyValue As String = String.Empty
-        Dim r As Integer
+        Dim r, rr As Integer
 
 
         dictDiffSource = New Dictionary(Of String, String)
@@ -634,6 +668,12 @@ Public Class frmMain
                 dictDiffTarget.Add(strPKeyValue, "Multiple records in target (" & DRR.Length.ToString & ")")
             Else
                 'PKey matches
+                For rr = 0 To DTS.Columns.Count - 1
+                    If DTS.Rows(r).Item(rr).ToString <> DRR(0).Item(rr).ToString Then
+                        dictDiffSource.Add(strPKeyValue & " - " & DTS.Columns(r).ColumnName, "Values different - " & DTS.Rows(r).Item(rr).ToString)
+                        dictDiffTarget.Add(strPKeyValue & " - " & DTT.Columns(r).ColumnName, "Values different - " & DTT.Rows(r).Item(rr).ToString)
+                    End If
+                Next
 
             End If
 
@@ -688,5 +728,29 @@ Public Class frmMain
         Return bMatch
 
     End Function
+
+    Private Sub ToggleFilter()
+
+        meFilter = Abs(Not -meFilter)
+        ToggleFilter(meFilter)
+
+    End Sub
+
+    Private Sub ToggleFilter(eWhich As eFilterState)
+
+        Select Case eWhich
+            Case eFilterState.Hide
+                treSource.Top = 0
+                treSource.Height += mconFilterMargin
+                txtFilterTable.Visible = False
+
+            Case eFilterState.Show
+                treSource.Top = mconFilterMargin
+                treSource.Height -= mconFilterMargin
+                txtFilterTable.Visible = True
+
+        End Select
+
+    End Sub
 
 End Class
