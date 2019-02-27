@@ -755,10 +755,4 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub Test()
-
-        MessageBox.Show("Here!")
-
-    End Sub
-
 End Class
