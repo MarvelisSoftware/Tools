@@ -1,4 +1,5 @@
 ﻿'Created by John Maher
+'   Tool used to compare tables and data
 
 Imports System.Math
 
