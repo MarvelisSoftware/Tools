@@ -1,0 +1,7 @@
+C:\Users\JohnM.ROTAIR\AppData\Local\Temporary Projects\Pause\bin\Debug\Pause.exe.config
+C:\Code\Tools\Pause\Pause\Pause\bin\Debug\Pause.exe.config
+C:\Code\Tools\Pause\Pause\Pause\bin\Debug\Pause.exe
+C:\Code\Tools\Pause\Pause\Pause\bin\Debug\Pause.pdb
+C:\Code\Tools\Pause\Pause\Pause\obj\Debug\Pause.csprojResolveAssemblyReference.cache
+C:\Code\Tools\Pause\Pause\Pause\obj\Debug\Pause.exe
+C:\Code\Tools\Pause\Pause\Pause\obj\Debug\Pause.pdb
